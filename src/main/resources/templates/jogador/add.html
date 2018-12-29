@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CartolaFC</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-warning  text-center">CartolaFC</h1>
+         
+    </div>
+
+    <h4 class="text-warning">
+       Create Team Categories
+    </h4>
+
+   <form th:action="@{/times/{timeId}/jogadores/salvar(timeId=${timeId})}" th:method="${jogador.id} == 0 ? post : put" th:object="${jogador}">
+        <div class="row">
+            <input id="id" type="hidden" th:field="*{id}"/>
+            <div class="form-group col-md-4">
+                <label for="categoria">Categoria:</label>
+                <input class="form-control" id="categoria" type="text" th:field="*{categoria}"/>
+                <div th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="jog">Jogador:</label>
+                <input class="form-control" id="jog" type="text" th:field="*{jog}"/>
+                <div th:if="${#fields.hasErrors('jog')}" th:errors="*{jog}"></div>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="numero">Número:</label>
+                <input class="form-control" id="numero" type="number" th:field="*{numero}"/>
+                <div th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}"></div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <button class="btn btn-warning"  type="submit">Salvar</button>
+        </div>
+
+    </form>
+    <hr/>
+
+    <a class="p-3 mb-2 bg-dark text-white" th:href="@{/times/{timeId}/jogadores/listar(timeId=${timeId})}">Voltar</a>
+
+    <hr/>
+    <footer class="footer">
+       <p>&copy; Felipe Dias Produções 2018 Pós web</p>
+    </footer>
+
+</div>
+</body>
+</html>

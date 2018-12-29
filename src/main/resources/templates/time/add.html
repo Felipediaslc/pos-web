@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CartolaFC</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-warning text-center">CartolaFC</h1>
+       
+    </div>
+
+    <h4 class="text-warning">
+        New Team
+    </h4>
+
+    <form th:action="@{/times/salvar}" th:method="${time.id} == 0 ? post : put" th:object="${time}">
+        <div class="row">
+            <input id="id" type="hidden" th:field="*{id}"/>
+            <div class="form-group col-md-4">
+                <label for="nome">Nome:</label>
+                <input class="form-control" id="nome" type="text" th:field="*{nome}"/>
+                <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label for="tecnico">Técnico:</label>
+                <input class="form-control" id="tecnico" type="text" th:field="*{tecnico}"/>
+                <div th:if="${#fields.hasErrors('tecnico')}" th:errors="*{tecnico}"></div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <button class="btn btn-warning" type="submit">Salvar</button>
+        </div>
+
+    </form>
+
+    <hr/>
+
+    <a class="p-3 mb-2 bg-dark text-white" th:href="@{/times/listar}">Voltar</a>
+
+    <hr/>
+    <footer class="footer">
+        <p>&copy;Felipe Dias Produções 2018 Pós Web</p>
+    </footer>
+
+</div>
+</body>
+</html>

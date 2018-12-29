@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CartolaFC</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-warning text-center">CartolaFC</h1>
+        
+    </div>
+
+    <div>
+        <a class="btn btn-warning" th:href="@{/times/{timeId}/jogadores/cadastro(timeId=${timeId})}">New player</a>
+    </div>
+
+    <hr/>
+    <div th:if="${jogadores != null}">
+        <h4 class="text-warning">
+            Convocations
+        </h4>
+
+        <div th:if="${mensagem != null}">
+            <div class="alert alert-info" role="alert">
+                <span th:text="${mensagem == null ? '&nbsp;' : mensagem}">mensagem</span>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Jogador</th>
+                <th>Número</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tr th:each="jogador : ${jogadores}">
+                <td th:text="${jogador.categoria}">Categoria</td>
+                <td th:text="${jogador.jog}">Jogador</td>
+                <td th:text="${jogador.numero}">Número</td>
+                <td>
+                    <a class="btn btn-sm btn-info" th:href="@{/times/{timeId}/jogadores/{jogadorId}/atualizar(timeId=${timeId},jogadorId=${jogador.id})}">Editar</a>
+                    <a class="btn btn-sm btn-warning" th:href="@{/times/{timeId}/jogadores/{jogadorId}/remover(timeId=${timeId},jogadorId=${jogador.id})}">Excluir</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:if="${#lists.isEmpty(jogadores)}">
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            0 teams cadastrados!
+        </div>
+    </div>
+
+    <hr/>
+    <a class="p-3 mb-2 bg-dark text-white" th:href="@{/times/listar}">Voltar</a>
+
+    <hr/>
+    <footer class="footer">
+        <p>&copy;Felipe Dias Produções 2018 Pós web</p>
+    </footer>
+
+</div>
+</body>
+</html>
